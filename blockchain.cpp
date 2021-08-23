@@ -1,5 +1,6 @@
 #include "block.h"
 #include "blockchain.h"
+#include "util.h"
 using namespace std;
 
 Blockchain::Blockchain() {
@@ -7,5 +8,5 @@ Blockchain::Blockchain() {
 }
 
 void Blockchain::addBlock(string data) {
-    B
+    this->chain.push_back(Block::mine(this->chain[this->chain.size()-1], data));
 }

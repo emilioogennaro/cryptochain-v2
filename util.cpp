@@ -1,6 +1,7 @@
 #include "util.h"
+#include <string>
 
-std::string Util::stringToHex(const std::string& input)
+std::string stringToHex(const std::string& input)
 {
     static const char hex_digits[] = "0123456789abcdef";
 
@@ -14,13 +15,13 @@ std::string Util::stringToHex(const std::string& input)
     return output;
 }
 
-std::string Util::hexToBin(std::string hexdec)
+std::string hexToBin(std::string hexdec)
 {
     long int i = 0;
     std::string output = "";
- 
+
     while (hexdec[i]) {
- 
+
         switch (hexdec[i]) {
         case '0':
             output += "0000";
@@ -83,7 +84,7 @@ std::string Util::hexToBin(std::string hexdec)
     return output;
 }
 
-std::string Util::hashSHA3_512(const std::string& input) {
+std::string hashSHA3_512(const std::string& input) {
     //Initial
     unsigned char* hashResult = new unsigned char[sha3_512_desc.hashsize];
     //Initialize a state variable for the hash
@@ -98,4 +99,13 @@ std::string Util::hashSHA3_512(const std::string& input) {
     hexhashResult = stringToHex(hexhashResult);
     // Return the result
     return hexhashResult;
+}
+
+std::string stringifyBlock(int timestamp, std::string lastHash, std::string data) {
+    std::string result = "";
+    result += std::to_string(timestamp);
+    result += lastHash;
+    result += data;
+
+    return result;
 }

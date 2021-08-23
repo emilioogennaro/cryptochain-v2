@@ -12,4 +12,9 @@ Block Block::genesis() {
     return Block(0, "0", "0", "0");
 }
 
-Block Block::mine(Block lastBlock, std::string data) { }
+Block Block::mine(Block lastBlock, string data) {
+    int timestamp = time(NULL);
+    string lastHash = lastBlock.hash;
+    string hash = hashSHA3_512(stringifyBlock(timestamp, lastHash, data));
+    return Block(timestamp, lastHash, hash, data);
+}
